@@ -109,11 +109,10 @@ public class UserServlet extends BaseServlet {
 	 * @param req
 	 * @param resp
 	 * @return
-	 * @throws ServletException
-	 * @throws IOException
+	 * @throws Exception 
 	 */
 	public String regist(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+			throws Exception {
 		/*
 		 * 1. 封装表单数据到User对象
 		 */

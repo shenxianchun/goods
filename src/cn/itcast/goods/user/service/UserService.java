@@ -12,6 +12,7 @@ import cn.itcast.commons.CommonUtils;
 import cn.itcast.goods.user.dao.UserDao;
 import cn.itcast.goods.user.domain.User;
 import cn.itcast.goods.user.service.exception.UserException;
+import cn.itcast.goods.utils.QQEmailUtils;
 import cn.itcast.mail.Mail;
 import cn.itcast.mail.MailUtils;
 
@@ -114,8 +115,9 @@ public class UserService {
 	/**
 	 * 注册功能
 	 * @param user
+	 * @throws Exception 
 	 */
-	public void regist(User user) {
+	public void regist(User user) throws Exception {
 		/*
 		 * 1. 数据的补齐
 		 */
@@ -159,12 +161,13 @@ public class UserService {
 		// MessageForm.format方法会把第一个参数中的{0},使用第二个参数来替换。
 		// 例如MessageFormat.format("你好{0}, 你{1}!", "张三", "去死吧"); 返回“你好张三，你去死吧！”
 		String content = MessageFormat.format(prop.getProperty("content"), user.getActivationCode());
-		Mail mail = new Mail(from, to, subject, content);
+		/*Mail mail = new Mail(from, to, subject, content);*/
 		/*
 		 * 发送邮件
 		 */
 		try {
-			MailUtils.send(session, mail);
+			/*MailUtils.send(session, mail);*/
+			QQEmailUtils.sendMail(from,to, name, pass, subject, content);
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
